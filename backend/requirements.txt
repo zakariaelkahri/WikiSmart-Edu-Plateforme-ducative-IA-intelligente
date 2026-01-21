@@ -1,0 +1,17 @@
+fastapi
+groq
+uvicorn[standard]
+SQLAlchemy
+psycopg2-binary
+python-jose[cryptography]
+passlib[bcrypt]
+pydantic
+pydantic-settings
+email-validator
+requests
+wikipedia
+langchain-community
+pytest
+httpx
+python-multipart
+google-genai

@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List, Dict, Any
 
-from pydantic import BaseModel
+from pydantic import BaseModel, HttpUrl
 
 
 class MultipleChoiceQuestion(BaseModel):
@@ -16,11 +16,11 @@ class OpenQuestion(BaseModel):
 
 
 class QuizGenerationRequest(BaseModel):
-    article_id: int
+    url: HttpUrl
 
 
 class QuizGenerationResponse(BaseModel):
-    article_id: int
+    url: HttpUrl
     multiple_choice: List[MultipleChoiceQuestion]
     open_questions: List[OpenQuestion]
 

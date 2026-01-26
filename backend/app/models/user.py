@@ -8,7 +8,7 @@ from app.models.base import Base
 
 class Role(PyEnum):
     USER = "USER"
-    ADMIN = "ADMIN"
+    ADMIN = "ADMIN" 
 
 
 class User(Base):

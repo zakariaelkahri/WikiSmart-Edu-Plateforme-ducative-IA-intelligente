@@ -1,15 +1,19 @@
 from typing import List
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from app.schemas.quiz import QuizGenerationRequest, QuizGenerationResponse, QuizAttemptCreate, QuizAttemptResponse
 from app.services import wikipedia_service, llm_gemini_service
+from app.api.v1.routes_auth import get_current_active_user
 
 router = APIRouter(prefix="/quiz", tags=["quiz"])
 
 
 @router.post("/generate", response_model=QuizGenerationResponse, summary="Generate quiz via Gemini")
-async def generate_quiz(payload: QuizGenerationRequest):
+async def generate_quiz(
+    payload: QuizGenerationRequest,
+    current_user = Depends(get_current_active_user),
+):
     """Generate a quiz for a Wikipedia article URL using Gemini.
 
     We fetch the article sections directly from Wikipedia via URL,
@@ -38,6 +42,9 @@ async def generate_quiz(payload: QuizGenerationRequest):
 
 
 @router.post("/attempt", response_model=QuizAttemptResponse, summary="Submit quiz attempt and compute score")
-async def submit_quiz_attempt(payload: QuizAttemptCreate):
+async def submit_quiz_attempt(
+    payload: QuizAttemptCreate,
+    current_user = Depends(get_current_active_user),
+):
     # TODO: persist attempt in database and return score
     raise NotImplementedError

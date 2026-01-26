@@ -18,24 +18,34 @@ from app.services import wikipedia_service, llm_groq_service, llm_gemini_service
 from app.db.session import SessionLocal
 from app.models.article import Article
 from fastapi import HTTPException, status
+from app.api.v1.routes_auth import get_current_active_user
 
 router = APIRouter(prefix="/articles", tags=["articles"])
 
 
 @router.post("/ingest/url", response_model=ArticleResponse, summary="Ingest article from Wikipedia URL")
-async def ingest_article_from_url(payload: ArticleIngestRequest):
+async def ingest_article_from_url(
+    payload: ArticleIngestRequest,
+    current_user = Depends(get_current_active_user),
+):
     # TODO: call wikipedia_service to fetch and preprocess article
     raise NotImplementedError
 
 
 @router.post("/ingest/pdf", response_model=ArticleResponse, summary="Ingest article from PDF upload")
-async def ingest_article_from_pdf(file: UploadFile = File(...)):
+async def ingest_article_from_pdf(
+    file: UploadFile = File(...),
+    current_user = Depends(get_current_active_user),
+):
     # TODO: call pdf_service to extract text and preprocess
     raise NotImplementedError
 
 
 @router.post("/summary", response_model=SummaryResponse, summary="Generate summary via Groq")
-async def summarize_article(payload: SummaryRequest):
+async def summarize_article(
+    payload: SummaryRequest,
+    current_user = Depends(get_current_active_user),
+):
     # TODO: call llm_groq_service to summarize
     raise NotImplementedError
 
@@ -119,7 +129,10 @@ async def translate_article(payload: TranslationRequest):
     response_model=WikipediaTranslationResponse,
     summary="Translate Wikipedia article via Gemini from URL",
 )
-async def translate_wikipedia_article(payload: WikipediaTranslationRequest) -> WikipediaTranslationResponse:
+async def translate_wikipedia_article(
+    payload: WikipediaTranslationRequest,
+    current_user = Depends(get_current_active_user),
+) -> WikipediaTranslationResponse:
     """Translate a Wikipedia article given its URL using Gemini LLM.
 
     This endpoint:

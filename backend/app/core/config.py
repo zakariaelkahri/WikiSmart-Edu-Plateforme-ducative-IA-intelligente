@@ -24,9 +24,6 @@ class Settings(BaseSettings):
     gemini_api_key: str | None 
     # Default to a fast, free Groq model suitable for summaries
     groq_model_name: str = "llama-3.1-8b-instant"
-    # Default Gemini models (text-only) for translation/quiz using google-genai
-    # These should match model IDs visible in Google AI Studio
-    # and can be overridden via GEMINI_MODEL_NAME_TRANSLATION / GEMINI_MODEL_NAME_QUIZ
     gemini_model_name_translation: str = "gemini-2.5-flash"
     gemini_model_name_quiz: str = "gemini-2.5-flash"
     llm_temperature: float = 0.3

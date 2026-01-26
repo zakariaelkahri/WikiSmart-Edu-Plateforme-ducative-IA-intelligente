@@ -20,18 +20,26 @@ def seed_initial_data(db: Session) -> None:
 
     # Create users
     user1 = User(
-        username="alice",
-        email="alice@example.com",
-        hashed_password=get_password_hash("password123"),
-        role=Role.USER,
-    )
-    user2 = User(
         username="admin",
         email="admin@example.com",
         hashed_password=get_password_hash("admin123"),
         role=Role.ADMIN,
     )
-    db.add_all([user1, user2])
+    user2 = User(
+                username="alice",
+        email="alice@example.com",
+        hashed_password=get_password_hash("password123"),
+        role=Role.USER,
+    )
+    
+    user3 = User(
+    username="zakaria",
+    email="zakaria@example.com",
+    hashed_password=get_password_hash("password123"),
+    role=Role.USER,
+    )
+        
+    db.add_all([user1, user2, user3])
     db.flush()
 
     # Create articles
@@ -54,7 +62,7 @@ def seed_initial_data(db: Session) -> None:
 
     # Create quiz attempts
     attempt1 = QuizAttempt(
-        userid=user1.id,
+        userid=user2.id,
         articleid=article2.id,
         score=85.5,
         submittedat=datetime.utcnow(),

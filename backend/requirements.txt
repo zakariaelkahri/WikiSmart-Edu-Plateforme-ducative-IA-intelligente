@@ -12,6 +12,7 @@ requests
 wikipedia
 langchain-community
 pytest
+pytest-cov
 httpx
 python-multipart
 google-genai

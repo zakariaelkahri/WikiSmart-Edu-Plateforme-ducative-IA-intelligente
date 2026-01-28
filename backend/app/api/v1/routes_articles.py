@@ -63,7 +63,7 @@ async def summarize_wikipedia_article(payload: WikipediaSummaryRequest) -> Wikip
     - concatenates and lightly cleans the text
     - calls Groq LLM to generate a concise summary
     """
-
+    
     article_data = wikipedia_service.fetch_article_sections(str(payload.url))
     sections = article_data.get("sections", {}) or {}
 

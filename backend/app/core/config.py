@@ -17,8 +17,8 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = 60
 
     # CORS
-    cors_origins: List[str] = ["http://localhost:3000", "http://localhost:5173"]
-
+    cors_origins: List[str] = ["http://localhost:5173"]
+# "http://localhost:3000", 
     # LLMs
     groq_api_key: str | None 
     gemini_api_key: str | None 
